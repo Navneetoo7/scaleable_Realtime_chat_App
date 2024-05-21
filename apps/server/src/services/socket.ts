@@ -3,8 +3,14 @@ import { Server } from "socket.io";
 class SocketService {
   private _io: Server;
   constructor() {
-    this._io = new Server();
+    this._io = new Server({
+      cors: {
+        allowedHeaders: ["*"],
+        origin: "*",
+      },
+    });
   }
+
   public initListeners() {
     const io = this.io;
     console.log("Init Socket Service.....");
@@ -15,6 +21,7 @@ class SocketService {
       );
     });
   }
+
   get io() {
     return this._io;
   }
